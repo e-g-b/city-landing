@@ -1,0 +1,416 @@
+<link rel="import" href="../../../../../../vendor/bower/polymer/polymer.html">
+<link rel='import' href='../../../../../../elements/ui/ui-icon/ui-icon.html'>
+
+<!--
+`none` - `the-city-landing-page` - Landing page for The City podcast
+
+Add additional specs and styling information here in markdown format
+
+-->
+<dom-module id="storytelling-city-podcast-landing-page">
+    <template>
+        <style>
+        /*----- Basic -----*/
+          .flex {
+              @apply --flex;
+          }
+
+          .text {
+              @apply --display-1;
+              color: var(--theme-color, #009bff);
+          }
+
+          /*----- The City Containers -----*/
+
+          .the-city-landing-page-container {
+              background-image: url("https://www.gannett-cdn.com/usat-storytelling/the-city/images/bg.jpg");
+              background-repeat: repeat;
+              background-position: center;
+              background-size: 1196px 1196px;
+              font-family: var(--sans-serif);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 0;
+          }
+
+          .page-wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+            overflow: auto;
+          }
+
+          .page-wrap::after {
+              content: "";
+              clear: both;
+              display: table;
+          }
+
+          /*----- Content Container -----*/
+          .content-container {
+            width: calc(100% - 20px);
+            min-height: calc(100% - 120px);
+            padding: 10px;
+            position: relative;
+          }
+
+          .content-container::after {
+              content: "";
+              clear: both;
+              display: table;
+          }
+
+          .content-wrap {
+            background-color: rgb(87,87,87);
+            max-width: 1100px;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            position: relative;
+            margin: 25% auto 10px;
+            padding: 25px;
+            @apply --flex;
+            flex-direction: column;
+            box-shadow: 0px 10px 35px 0px rgba(0,0,0,0.2);
+          }
+
+          .content-wrap::after {
+              content: "";
+              clear: both;
+              display: table;
+          }
+
+          .announcement {
+            position: absolute;
+            left: 0;
+            @apply --flex;
+            top: -50px;
+            flex-direction: row;
+          }
+
+          .announcement p {
+            @apply --display-5;
+            color: var(--color-white);
+            font-weight: 900;
+            padding-left: 10px;
+            width: inherit;
+            text-transform: uppercase;
+          }
+
+          .icon-podcast{
+            background: url("https://www.gannett-cdn.com/usat-storytelling/the-city/images/podcast.svg") no-repeat;
+            background-size: contain;
+            width: 60px;
+            height: 42px;
+            margin-bottom: -10px;
+          }
+
+          .content-left {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+          }
+
+          .content-right {
+            padding: 0;
+            flex-grow: 1;
+            flex-shrink: 1;
+          }
+
+          .content-right h1 {
+            @apply --display-1;
+            color: var(--color-white);
+            line-height: 0.5em;
+          }
+
+          .content-right p {
+            @apply --display-4;
+            color: var(--color-white);
+            font-weight: var(--font-weight-normal);
+            line-height: 1.4em;
+          }
+
+          .soc-container {
+            @apply --flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+
+          .soc-share {
+            width: 45px;
+            height: 45px;
+            background-color: var(--color-white);
+            border-radius: 2px;
+            box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.12);
+            margin-left: 20px;
+            position: relative;
+          }
+
+          .soc-share:nth-of-type(1) {
+            margin-left: 0;
+          }
+
+          .soc-share a {
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
+
+          .soc-share img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          }
+
+          .soc-container p {
+            @apply --display-8;
+            color: var(--color-white);
+            width: 100%;
+            line-height: 0.1em;
+          }
+
+          .logo {
+            width: 100%;
+            height: auto;
+            border-radius: 100%;
+            border: 5px solid var(--color-white);
+            box-shadow: 0px 2px 25px 0px rgba(0,0,0,0.12);
+          }
+
+          .border-bottom {
+            background-color: rgb(0,155,255);
+            width: 100%;
+            height: 10px;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+
+          /*----- Form -----*/
+          .form-container {
+            position: relative;
+            width: 100%;
+            margin: 30px 0 0 0;
+            padding: 0;
+          }
+
+          .form-container iframe {
+            width: 100%;
+            height: 120px;
+            border: 0;
+            margin: 0;
+            padding: 0;
+          }
+
+
+          /*----- Footer -----*/
+          .footer {
+            background-color: rgb(0,0,0);
+            width: calc(100% - 50px);
+            height: 100px;
+            padding: 0 25px;
+            position: relative;
+            @apply --flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .footer p, .footer a {
+            font-size: 12px;
+            color: var(--color-white);
+            line-height: 0;
+            text-decoration: none;
+          }
+
+          .footer a:hover {
+            color: rgb(0,155,255);
+          }
+
+          .logo-usat {
+            background: url("https://www.gannett-cdn.com/usat-storytelling/the-city/images/logo-usat.svg") no-repeat;
+            width: 150px;
+            height: 15.83px;
+            margin-top: 0.25em;
+          }
+
+          .logo-usat a {
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
+
+          .footer-left {
+            display: inline-flex;
+            height: 25px;
+            padding-top: 25px;
+          }
+          .footer-right {
+            display: inline-flex;
+            height: 25px;
+          }
+
+          .footer-right p {
+            text-align: left;
+          }
+
+          /*----- Background Image -----*/
+          .background {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(#333333, #111111);
+            box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
+            opacity: 0.95;
+            position: absolute;
+            z-index: 1;
+          }
+
+          /*----- Media Queries -----*/
+
+          @media(min-width: 800px) {
+            .content-wrap {
+              flex-direction: row;
+              margin: 15% auto 10px;
+            }
+
+            .form-container iframe {
+              height: 100px;
+            }
+
+            .content-left {
+              max-width: 300px;
+              margin: 0;
+              padding: 25px;
+            }
+
+            .content-right {
+              padding: 25px;
+            }
+
+            .footer {
+              @apply --flex;
+              flex-direction: row;
+            }
+
+            .footer-left {
+              display: inline-flex;
+              width: 50%;
+              height: 25px;
+              padding-top: 0;
+            }
+
+            .footer-right {
+              display: inline-flex;
+              width: 50%;
+              height: 25px;
+            }
+
+            .footer-right p {
+              width: 100%;
+              text-align: right;
+            }
+
+          }
+
+        </style>
+
+        <div class="the-city-landing-page-container">
+          <div id="tclParentEl" class="page-wrap">
+            <div class="content-container">
+              <div class="content-wrap">
+                <div class="announcement"><div class="icon-podcast"></div><p>[[ announcement ]]</p></div>
+                <div class="content-left">
+                  <img class="logo" src="https://www.gannett-cdn.com/usat-storytelling/the-city/images/logo.png"/>
+                </div>
+                <div class="content-right">
+                  <h1>[[ headline ]]</h1>
+                  <div class="soc-container">
+                    <p>[[ socialCopy ]]:</p>
+                    <div class="soc-share"><a href="[[ socLinkFacebook ]]" target="_blank"><img src="https://www.gannett-cdn.com/usat-storytelling/the-city/images/fb.svg" /></a></div>
+                    <div class="soc-share"><a href="[[ socLinkTwitter ]]" target="_blank"><img src="https://www.gannett-cdn.com/usat-storytelling/the-city/images/tw.svg" /></a></div>
+                    <div class="soc-share"><a href="[[ socLinkInstagram ]]" target="_blank"><img src="https://www.gannett-cdn.com/usat-storytelling/the-city/images/ig.svg" /></a></div>
+                  </div>
+                  <p>[[ content ]]</p>
+
+                  <div class="form-container">
+
+                  </div>
+
+                </div>
+                <div class="border-bottom"></div>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="footer-left">
+                <div class="logo-usat"><a href="http://www.usatoday.com" target="_blank"></a></div>
+                <p>&nbsp;&nbsp;&nbsp; [[footerCopy ]], <span id="year" class="cur-year"></span></p>
+              </div>
+              <div class="footer-right">
+                <p><a href="http://static.usatoday.com/terms/" target="_blank">TERMS OF SERVICE</a> &nbsp;&nbsp; | &nbsp;&nbsp; <a href="http://static.usatoday.com/privacy/" target="_blank">PRIVACY NOTICE</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="background"></div>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'storytelling-city-podcast-landing-page',
+            designId: 'none',
+            properties: {
+              announcement: {
+                type: String,
+                value: 'Coming fall 2018'
+              },
+              headline: {
+                type: String,
+                value: "It\'s all about power"
+              },
+              content: {
+                type: String,
+                value: 'Enter your email to receive updates about our podcast launch, new episodes, live events, and more.'
+              },
+              socialCopy: {
+                type: String,
+                value: 'Follow us on'
+              },
+              socLinkFacebook: {
+                type: String,
+                value: 'https://www.facebook.com/thecitypod/'
+              },
+              socLinkTwitter: {
+                type: String,
+                value: 'https://twitter.com/thecitypod'
+              },
+              socLinkInstagram: {
+                type: String,
+                value: 'https://www.instagram.com/thecitypod/'
+              },
+              footerCopy: {
+                type: String,
+                value: 'All rights reserved'
+              }
+            },
+
+            /** Called after property values are set and local DOM is initialized. */
+            ready: function() {
+
+              let currentYear = (new Date()).getFullYear();
+              this.$.year.innerHTML = currentYear;
+            },
+
+            getImagesFolder() {
+                return `https://www.gannett-cdn.com/usat-storytelling/the-city/images/`;
+            }
+        });
+    </script>
+
+</dom-module>
